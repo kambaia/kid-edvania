@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Parabéns Edvânia</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: red;
+            color: white;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        h1 {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transform: scale(0.5);
+            animation: showMessage 2s ease-in-out forwards;
+        }
+        
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            opacity: 0.8;
+            transform: rotate(45deg);
+            animation: float 5s infinite;
+        }
+        
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: pink;
+            border-radius: 50%;
+            top: -10px;
+            left: 0;
+        }
+        
+        .heart::after {
+            top: 0;
+            left: -10px;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes showMessage {
+            0% {
+                opacity: 0;
+                transform: scale(0.4);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        img {
+            cursor: pointer;
+            z-index: 2;
+            position: relative;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        .special-message {
+            font-size: 40px;
+            color: yellow;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-align: center;
+        }
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #ff5733;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #c70039;
+        }
+        
+        .pre {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="pre">
+        <img src="03-39-03-19_512.webp" alt="Clique para revelar" onclick="revealMessage()">
+        <h3 class="special-message" id="special-message">
+            🎁 Você tem um presente especial para o seu amigo Alberto Kambaia! 🎉
+        </h3>
+
+    </div>
+
+
+    <h1 style="display: none; padding: 20px; text-align: center;">
+        "Edvânia, você sabia que meu coração é mais bagunceiro que uma segunda-feira, mas desde que você entrou nele, ele virou feriado? 🥰 Você é como Wi-Fi na casa da avó: a conexão mais forte que já senti. 😄 Agora, falando sério... você tem o sorriso que
+        faz meu dia valer a pena, a energia que me motiva e a beleza que me deixa sem palavras. Se eu fosse uma música, você seria meu refrão favorito. Dizem que ninguém é perfeito, mas você acabou de provar que eles estavam errados. Então, vamos combinar:
+        você me dá um sorriso agora e eu cuido de te fazer feliz para sempre. Topa? 😉
+    </h1>
+    <div class="hearts"></div>
+
+    <script>
+        const heartsContainer = document.querySelector('.hearts');
+        const image = document.querySelector('img');
+        const message = document.querySelector('h1');
+        const specialMessage = document.getElementById('special-message');
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heartsContainer.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        function revealMessage() {
+            image.style.display = 'none';
+            message.style.display = 'block';
+            hideSpecialMessage();
+        }
+
+        function hideSpecialMessage() {
+            specialMessage.style.display = 'none';
+        }
+
+        setInterval(createHeart, 300);
+    </script>
+</body>
+
+</html>
